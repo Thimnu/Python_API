@@ -1,0 +1,44 @@
+import csv
+from turtle import pd
+
+csv_reader = csv.reader("sales.csv")
+line_count: int = 0
+for row in csv_reader:
+    if line_count == 0:
+        print("year,month,sales,expenditure")
+        line_count += 1
+print("line_count = 0")
+#The CSV file is opened as a text file with Python's built-in open() function, which returns a file object
+
+sales: set[int] = {6226, 1521, 1842, 2051, 1728, 2138, 7479, 4434, 3615, 5472, 7224, 1812}
+
+res = sum(sales)
+avg = res / len(sales)
+print(res, "sum is: ", "Average is: ", avg)
+#Collect sales from each month into a single list
+
+expenditure: set[int] = {3808,3373,3965,1098,3046,2258,2084,2799,1649,1116,1431,3532}
+
+res = sum(expenditure)
+avg = res / len(expenditure)
+print("sum is: ", res, "Average is: ", avg)
+#Collect expenditure from each month into a single list AvgSales=3795.17 AvgExpenditure=2513.25
+
+min(sales)
+max(sales)
+print("min","max")
+#minSales=1521 maxSales=7479
+
+min(expenditure)
+max(expenditure)
+print("min","max")
+#minExpenduture=1098 maxExpenditure=3965
+#Output a summary of the results to a spreadsheet
+
+df = pd.Dataframe({'sales': [6226, 1521, 1842, 2051, 1728, 2138, 7479, 4434, 3615, 5472, 7224, 1812],
+                   'expenditure': [3808, 3373, 3965, 1098, 3046, 2258, 2084, 2799, 1649, 1116, 1431, 3532]})
+df = df.set_index('jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec')
+final=df.pct_change(fill_method ='fill')
+final1=final*100
+print(final1)
+#Monthly changes as a percentage
